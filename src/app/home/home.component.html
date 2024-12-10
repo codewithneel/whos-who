@@ -1,11 +1,15 @@
 <app-navbar></app-navbar>
-<div *ngIf="authLoading || configLoading">Loading...</div>
-<div *ngIf="!authLoading && !configLoading">
-  Genre:
-  <select [(ngModel)]="selectedGenre" (ngModelChange)="setGenre($event)">
-    <option [value]=""></option>
-    <option [value]="genre" *ngFor="let genre of genres">
-      {{ genre }}
-    </option>
-  </select>
+<div class="container">
+    <h1>Welcome to Who's Who</h1>
+    <div class="rules">
+        <h2>How to Play:</h2>
+        <ul>
+            <li>Select your preferred music genre in the game settings.</li>
+            <li>You will be shown an image of a random artist from the chosen genre.</li>
+            <li>Choose the correct artist's name from the provided options.</li>
+            <li>If you guess correctly, another artist will appear for you to identify.</li>
+            <li>The game ends when you make an incorrect guess.</li>
+            <li>Your final score is the number of consecutive correct guesses.</li>
+        </ul>
+    </div>
 </div>
