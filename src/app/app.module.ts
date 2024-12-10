@@ -15,7 +15,9 @@ const routes: Routes = [
   {path: "", component: HomeComponent},
   {path: "play", component: GameComponent},
   {path: "settings", component: SettingsComponent}, 
-  {path: "leaderboard", component: LeaderboardComponent}
+  {path: "leaderboard", component: LeaderboardComponent},
+  { path: 'result', component: ResultComponent }
+
 ];
 
 @NgModule({
