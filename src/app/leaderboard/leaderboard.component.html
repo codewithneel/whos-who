@@ -1,2 +1,20 @@
 <app-navbar></app-navbar>
-<p>leaderboard works!</p>
+<div class="leaderboard-container">
+    <h1>Leaderboard</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let player of players; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ player.name }}</td>
+            <td>{{ player.score }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
