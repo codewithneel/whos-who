@@ -9,11 +9,17 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { GameComponent } from './game/game.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ResultComponent } from './result/result.component';
+import { SettingsComponent } from "./settings/settings.component";
 
-const routes: Routes = [{ path: "", component: HomeComponent }];
+const routes: Routes = [
+  {path: "", component: HomeComponent},
+  {path: "play", component: GameComponent},
+  {path: "settings", component: SettingsComponent}, 
+  {path: "leaderboard", component: LeaderboardComponent}
+];
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LeaderboardComponent, GameComponent, NavbarComponent, ResultComponent],
+  declarations: [AppComponent, NavbarComponent, HomeComponent, LeaderboardComponent, GameComponent, ResultComponent, SettingsComponent],
   imports: [BrowserModule, FormsModule, RouterModule.forRoot(routes)],
   providers: [],
   bootstrap: [AppComponent],
