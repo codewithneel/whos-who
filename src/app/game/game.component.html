@@ -1,2 +1,22 @@
 <app-navbar></app-navbar>
-<p>game works!</p>
+<div>
+    <h1>Who's who</h1>
+    <div class="game-container">
+        <button class="play-button" *ngIf="!isGameStarted" (click)="startGame()">Play</button>
+        <div *ngIf="isGameStarted && !gameOver" class="game">
+            <div class="left">
+                <img src="{{image}}" style="width:320px;height:320px;">
+            </div>
+            <div class="buttons">
+                <button class="button btn-55" *ngFor="let option of shuffledOptions" (click)="checkAnswer(option)">{{option}}</button>
+            </div>
+        </div>
+        <div *ngIf="gameOver && score !== 40" >
+            <h1>Game Over</h1>
+            <h1>Score: {{score}}</h1>
+        </div>
+        <div *ngIf="gameOver && score === 40">
+            <h1>Max Score: 40</h1>
+        </div>
+    </div>
+</div>
