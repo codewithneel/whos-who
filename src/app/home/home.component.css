@@ -12,14 +12,14 @@ body {
     padding: 0;
     text-align: center;
     color: #333;
-    overflow: hidden; /* Prevent scrolling */
+    overflow: hidden;
     position: relative;
 }
 
 /* Navbar Styling */
 app-navbar {
     position: relative;
-    z-index: 3; /* Ensures navbar stays above background */
+    z-index: 3;
 }
 
 /* Background Grid */
@@ -29,9 +29,9 @@ app-navbar {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Ensures the background stays behind the content */
+    z-index: 1;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3x2 grid layout */
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 0;
 }
@@ -39,9 +39,9 @@ app-navbar {
 .background-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure uniform sizing */
-    opacity: 0.7; /* Slightly dim the images for better contrast with text */
-    transition: opacity 1s; /* Smooth fade effect */
+    object-fit: cover;
+    opacity: 0.7;
+    transition: opacity 1s;
 }
 
 .background-container img.active {
@@ -51,13 +51,13 @@ app-navbar {
 /* Adjusted Container for Main Content */
 .container {
     position: relative;
-    z-index: 2; /* Ensures content appears above the background */
-    max-width: 700px; /* Limits the width of the box */
-    margin: 50px auto; /* Centers the box horizontally and adds vertical margin */
-    padding: 20px 30px; /* Adjust padding for content spacing */
-    background: rgba(255, 255, 255, 0.8); /* White background with transparency */
-    border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
+    z-index: 2;
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Title Styling */
@@ -92,7 +92,7 @@ h1 {
     }
 
     .container {
-        padding: 15px 20px; /* Reduce padding for smaller screens */
+        padding: 15px 20px;
     }
 
     .rules {
