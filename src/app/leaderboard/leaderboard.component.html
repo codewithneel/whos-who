@@ -1,9 +1,45 @@
 <app-navbar></app-navbar>
+
+<div class="background-container">
+    <img
+            *ngFor="let bg of backgroundImages; let i = index"
+            [src]="bg"
+            alt="Background Image {{ i }}"
+            class="background-image"
+    />
+</div>
+
 <div class="leaderboard-container">
-    <h1>Leaderboard</h1>
-    <ul>
-        <li *ngFor="let player of leaderboard; let i = index">
-            {{ i + 1 }}. {{ player.name }} - {{ player.score }} points
-        </li>
-    </ul>
+    <div class="leaderboard-box">
+        <h1>Leaderboard</h1>
+
+        <!-- Podium Display -->
+        <div class="podium">
+            <div class="podium-item second">
+                <p>2nd</p>
+                <p>{{ leaderboard[1]?.name }}</p>
+                <p>{{ leaderboard[1]?.score }} pts</p>
+            </div>
+            <div class="podium-item first">
+                <p>1st</p>
+                <p>{{ leaderboard[0]?.name }}</p>
+                <p>{{ leaderboard[0]?.score }} pts</p>
+            </div>
+            <div class="podium-item third">
+                <p>3rd</p>
+                <p>{{ leaderboard[2]?.name }}</p>
+                <p>{{ leaderboard[2]?.score }} pts</p>
+            </div>
+        </div>
+
+        <!-- Remaining Leaderboard -->
+        <div class="lower-leaderboard">
+            <div *ngIf="leaderboard[3]">
+                4. {{ leaderboard[3]?.name }} - {{ leaderboard[3]?.score }} pts
+            </div>
+            <div *ngIf="leaderboard[4]">
+                5. {{ leaderboard[4]?.name }} - {{ leaderboard[4]?.score }} pts
+            </div>
+        </div>
+    </div>
 </div>

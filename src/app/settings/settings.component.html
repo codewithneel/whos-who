@@ -1,10 +1,22 @@
 <app-navbar></app-navbar>
+
+<div class="background-container">
+    <img
+            *ngFor="let bg of backgroundImages; let i = index"
+            [src]="bg"
+            alt="Background Image {{ i }}"
+            class="background-image"
+    />
+</div>
+
 <div class="settings-container">
-    <h2>Select Genre</h2>
-    <label for="genreSelect">Choose a genre:</label>
-    <select id="genreSelect" [(ngModel)]="selectedGenre" (ngModelChange)="onGenreChange()">
-        <option [value]="''">-- Select Genre --</option>
-        <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
-    </select>
-    <p>Selected Genre: {{ selectedGenre }}</p>
+    <div class="settings-box">
+        <h2>Select Genre</h2>
+        <label for="genreSelect">Choose a genre:</label>
+        <select id="genreSelect" [(ngModel)]="selectedGenre" (ngModelChange)="onGenreChange()">
+            <option [value]="''">-- Select Genre --</option>
+            <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+        </select>
+        <p>Selected Genre: {{ selectedGenre }}</p>
+    </div>
 </div>

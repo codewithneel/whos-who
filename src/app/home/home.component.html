@@ -1,4 +1,7 @@
 <app-navbar></app-navbar>
+<div class="background-container">
+    <img *ngFor="let bg of backgroundImages; let i = index" [src]="bg" />
+</div>
 <div class="container">
     <h1>Welcome to Who's Who</h1>
     <div class="rules">
@@ -13,3 +16,4 @@
         </ul>
     </div>
 </div>
+

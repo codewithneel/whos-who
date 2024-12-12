@@ -12,6 +12,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 
 export class GameComponent implements OnInit {
+
   token: string = "BQBZgU0PF0nPG5yzxtm4kDJpXl7pFFcwJg3E3RQSj-AltZYEEmA8pyQPxl5_YOIIl2lMalvsi1WgGl9U2XMOC_0JXQurjcvAGZKPs7kAInEwKTerkm8";
   artists: any[] = [];
   prevUsed: Set<number> = new Set<number>();
