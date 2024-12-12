@@ -13,6 +13,7 @@ import { BackgroundService } from 'src/services/backgroundService'; // Import th
 })
 
 export class GameComponent implements OnInit {
+
   token: string = "BQCZWzoSgBG8TdIJCP41YfUx4B8gzAPNXTWqENgxTp_ajO65JWfBj3W28NxPlT97bdY622r0LuU07AhKRIq5a_HK7mXlIlHuBNvLrN6RLy4n5dejskM";
   artists: any[] = [];
   backgroundImages: string[] = [];
