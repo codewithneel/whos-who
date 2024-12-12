@@ -13,7 +13,7 @@ import { BackgroundService } from 'src/services/backgroundService'; // Import th
 })
 
 export class GameComponent implements OnInit {
-  token: string = "BQC6gTPz7tA82A3dSmY_YwuRpDvuXwEN6LwdT-wieUdtdYkdUTC5k6SjBl4J-01j3nRzOeeVUlBMpD9peH_NZyPz-e4_uQBHS4foIXfolzhVGn9fhiA";
+  token: string = "BQCZWzoSgBG8TdIJCP41YfUx4B8gzAPNXTWqENgxTp_ajO65JWfBj3W28NxPlT97bdY622r0LuU07AhKRIq5a_HK7mXlIlHuBNvLrN6RLy4n5dejskM";
   artists: any[] = [];
   backgroundImages: string[] = [];
   prevUsed: Set<number> = new Set<number>();
