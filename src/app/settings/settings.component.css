@@ -1,25 +1,82 @@
-.settings-container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
+/* Background container styling */
+.background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    display: flex;
+    flex-wrap: wrap;
 }
 
+.background-image {
+    flex: 1 1 33%; /* Create a 3x2 grid */
+    width: 33%;
+    height: 50%;
+    object-fit: cover; /* Ensure images fill their space */
+    opacity: 0.7; /* Slight transparency for better readability */
+}
+
+/* Main container styling */
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    z-index: 1;
+}
+
+/* Translucent box styling */
+.settings-box {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Title styling */
 h2 {
     font-size: 24px;
     margin-bottom: 20px;
+    color: darkblue;
 }
 
+/* Dropdown and label styling */
 label {
     font-size: 18px;
     margin-right: 10px;
+    color: darkslategray;
 }
 
 select {
     padding: 10px;
     font-size: 16px;
     margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
 }
 
 p {
     font-size: 18px;
     font-weight: bold;
+    color: darkgreen;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 20px;
+    }
+
+    select {
+        font-size: 14px;
+    }
 }

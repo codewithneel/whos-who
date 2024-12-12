@@ -10,7 +10,7 @@ import { ScoreService } from 'src/services/scoreService';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
-  token: string = 'BQCXldz_MnLnoTwnc1jKIi9RaBSVRoD_ZSUJkdV5KeY2MzO9buX9loea8GUTzBAYD_iFQF2mcTW5te6phYgXS88bxLdu9fImWrRnszbQAASJl7w7JrY';
+  token: string = 'BQBM7pl7QMQzzmOYmm3uLiAoe04Nq5Ubnr0qmPnATG6ko4754oExb8gjFQkdJwXEKGW97ZYCM2taT9fL7WIbuEfkqau0IUOHbsbsNXMmb_O_PU0dI2I';
   artists: any[] = [];
   prevUsed: Set<number> = new Set<number>();
   isGameStarted: boolean = false;
