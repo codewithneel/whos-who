@@ -12,7 +12,7 @@ export class BackgroundService {
 
     async fetchAlbumCoversByGenre(genre: string): Promise<string[]> {
         if (this.albumCovers.length > 0) {
-            return this.albumCovers; // Return cached results
+            return this.albumCovers;
         }
 
         try {

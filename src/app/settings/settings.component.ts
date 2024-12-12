@@ -19,7 +19,7 @@ export class SettingsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      const genre = 'pop'; // Example default genre for background
+      const genre = 'pop';
       const albumCovers = await this.backgroundService.fetchAlbumCoversByGenre(genre);
 
       // Initialize with six random images

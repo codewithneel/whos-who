@@ -45,7 +45,7 @@ export class GameComponent implements OnInit {
       private router: Router,
       private scoreService: ScoreService,
       private sanitizer: DomSanitizer,
-      private backgroundService: BackgroundService  // Inject the background service
+      private backgroundService: BackgroundService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -57,7 +57,7 @@ export class GameComponent implements OnInit {
             .then(response => {
               this.artists = response.artists.items;
               this.apiResponseSuccess = true;
-              this.loadBackgroundImages(state); // Load background images based on genre
+              this.loadBackgroundImages(state);
             })
             .catch(error => {
               console.error('Error fetching artists:', error);
@@ -72,8 +72,8 @@ export class GameComponent implements OnInit {
     try {
       // Fetch album covers or background images based on genre
       const albumCovers = await this.backgroundService.fetchAlbumCoversByGenre(genre);
-      this.backgroundImages = albumCovers.slice(0, 6);  // Initialize with 6 random images
-      this.startBackgroundRotation(albumCovers); // Start background rotation
+      this.backgroundImages = albumCovers.slice(0, 6);
+      this.startBackgroundRotation(albumCovers);
     } catch (error) {
       console.error('Error fetching background images:', error);
     }
@@ -88,7 +88,7 @@ export class GameComponent implements OnInit {
         // Replace one image
         this.backgroundImages[replaceIndex] = albumCovers[randomIndex];
       }
-    }, 3000); // Rotate every 3 seconds
+    }, 3000);
   }
 
   startGame(): void {
@@ -149,7 +149,7 @@ export class GameComponent implements OnInit {
     if (artist['images'] && artist['images'][0]) {
       this.image = artist['images'][0]['url'];
     } else {
-      this.image = 'default_image_url'; // Replace with a placeholder image URL if no image is available
+      this.image = 'default_image_url';
     }
   }
 

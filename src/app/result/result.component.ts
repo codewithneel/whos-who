@@ -48,7 +48,7 @@ export class ResultComponent implements OnInit {
         // Replace one image
         this.backgroundImages[replaceIndex] = albumCovers[randomIndex];
       }
-    }, 3000); // Rotate every 3 seconds
+    }, 3000);
   }
 
   submitScore(): void {

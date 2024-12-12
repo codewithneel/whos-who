@@ -59,7 +59,7 @@ app-navbar {
     border: 2px solid purple;
     border-radius: 5px;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.8); /* Optional: keeps a translucent look */
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 /* Play Button Styling */
