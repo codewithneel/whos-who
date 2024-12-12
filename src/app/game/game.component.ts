@@ -4,6 +4,7 @@ import { GameConfigService } from 'src/services/gameConfig';
 import { Router } from '@angular/router';
 import { ScoreService } from 'src/services/scoreService';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { BackgroundService } from 'src/services/backgroundService'; // Import the background service
 
 @Component({
   selector: 'app-game',
@@ -12,9 +13,9 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 
 export class GameComponent implements OnInit {
-
-  token: string = "BQBZgU0PF0nPG5yzxtm4kDJpXl7pFFcwJg3E3RQSj-AltZYEEmA8pyQPxl5_YOIIl2lMalvsi1WgGl9U2XMOC_0JXQurjcvAGZKPs7kAInEwKTerkm8";
+  token: string = "BQDrVdBuo46SE0g00hsqfg--Gu1ExMqdG1P_O8IlTeHjIIrYNMd3fV_7c4TCNz_dPr06HPSKsgXqzpvYcxaWyshFLCBEg8JG_BKGJknrCZe-xKKeIWE";
   artists: any[] = [];
+  backgroundImages: string[] = [];
   prevUsed: Set<number> = new Set<number>();
   isGameStarted: boolean = false;
   gameOver: boolean = false;
@@ -39,13 +40,56 @@ export class GameComponent implements OnInit {
   }
   playlist: SafeResourceUrl | undefined;
 
-
   constructor(
       private gameConfigService: GameConfigService,
       private router: Router,
       private scoreService: ScoreService,
-      private sanitizer: DomSanitizer
+      private sanitizer: DomSanitizer,
+      private backgroundService: BackgroundService  // Inject the background service
   ) {}
+
+  async ngOnInit(): Promise<void> {
+    try {
+      // Fetch playlist and artist data as before
+      this.gameConfigService.genre.subscribe(state => {
+        this.playlist = this.sanitizer.bypassSecurityTrustResourceUrl(this.playlists[state]);
+        this.fetchArtistsByGenre(state)
+            .then(response => {
+              this.artists = response.artists.items;
+              this.apiResponseSuccess = true;
+              this.loadBackgroundImages(state); // Load background images based on genre
+            })
+            .catch(error => {
+              console.error('Error fetching artists:', error);
+            });
+      });
+    } catch (error) {
+      console.error('Error initializing game:', error);
+    }
+  }
+
+  async loadBackgroundImages(genre: string): Promise<void> {
+    try {
+      // Fetch album covers or background images based on genre
+      const albumCovers = await this.backgroundService.fetchAlbumCoversByGenre(genre);
+      this.backgroundImages = albumCovers.slice(0, 6);  // Initialize with 6 random images
+      this.startBackgroundRotation(albumCovers); // Start background rotation
+    } catch (error) {
+      console.error('Error fetching background images:', error);
+    }
+  }
+
+  startBackgroundRotation(albumCovers: string[]): void {
+    setInterval(() => {
+      if (albumCovers.length > 6) {
+        const randomIndex = Math.floor(Math.random() * albumCovers.length);
+        const replaceIndex = Math.floor(Math.random() * this.backgroundImages.length);
+
+        // Replace one image
+        this.backgroundImages[replaceIndex] = albumCovers[randomIndex];
+      }
+    }, 3000); // Rotate every 3 seconds
+  }
 
   startGame(): void {
     this.isGameStarted = true;
@@ -64,14 +108,13 @@ export class GameComponent implements OnInit {
   }
 
   checkAnswer(selectedAnswer: string): void {
-    this.check = true
-    this.selectedAnswer = selectedAnswer
+    this.check = true;
+    this.selectedAnswer = selectedAnswer;
     if (selectedAnswer !== this.answer) {
       setTimeout(() => {
         this.scoreService.setScore(this.score);
         this.endGame();
-      }
-      , 1500)
+      }, 1500);
     } else {
       setTimeout(() => {
         this.score += 1;
@@ -83,9 +126,8 @@ export class GameComponent implements OnInit {
           this.selectedAnswer = "";
           this.game();
         }
-      }
-      , 1000)
-  }
+      }, 1000);
+    }
   }
 
   endGame(): void {
@@ -128,20 +170,6 @@ export class GameComponent implements OnInit {
       const j = Math.floor(Math.random() * (i + 1));
       [this.shuffledOptions[i], this.shuffledOptions[j]] = [this.shuffledOptions[j], this.shuffledOptions[i]];
     }
-  }
-
-  ngOnInit(): void {
-    this.gameConfigService.genre.subscribe(state => {
-      this.playlist = this.sanitizer.bypassSecurityTrustResourceUrl(this.playlists[state]);
-      this.fetchArtistsByGenre(state)
-          .then(response => {
-            this.artists = response.artists.items;
-            this.apiResponseSuccess = true;
-          })
-          .catch(error => {
-            console.error('Error fetching artists:', error);
-          });
-    });
   }
 
   fetchArtistsByGenre = (genre: string) =>

@@ -1,23 +1,33 @@
 <app-navbar></app-navbar>
-<div>
-    <h1>Who's who</h1>
-    <div class="game-container">
-        <button class="play-button" [disabled]="!apiResponseSuccess" *ngIf="!isGameStarted" (click)="startGame()">Play</button>
-        <div *ngIf="isGameStarted && !gameOver" class="game">
-            <div class="left">
-                <img src="{{image}}" style="width:320px;height:320px;">
-            </div>
-            <div class="buttons">
-                <button class="button btn-55" *ngFor="let option of shuffledOptions" [ngClass]="{'correctAnswer': check && option === answer, 'incorrectAnswer': check && option !== answer && selectedAnswer === option}" (click)="checkAnswer(option)">{{option}}</button>
-            </div>
+<div class="background-container">
+    <img *ngFor="let bg of backgroundImages; let i = index" [src]="bg" />
+</div>
+<div class="game-container">
+    <h1>Who's Who</h1>
+    <button class="play-button" [disabled]="!apiResponseSuccess" *ngIf="!isGameStarted" (click)="startGame()">Play</button>
+    <div *ngIf="isGameStarted && !gameOver" class="game">
+        <div class="left">
+            <img src="{{image}}" style="width:320px;height:320px;">
         </div>
-        <div *ngIf="gameOver && score !== 40" >
-            <h1>Game Over</h1>
-            <h1>Score: {{score}}</h1>
-        </div>
-        <div *ngIf="gameOver && score === 40">
-            <h1>Max Score: 40</h1>
+        <div class="buttons">
+            <button class="button btn-55" *ngFor="let option of shuffledOptions" [ngClass]="{'correctAnswer': check && option === answer, 'incorrectAnswer': check && option !== answer && selectedAnswer === option}" (click)="checkAnswer(option)">{{option}}</button>
         </div>
     </div>
-    <iframe style="border-radius:12px" [src]="playlist" width="20%" height="370px" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <div *ngIf="gameOver && score !== 40">
+        <h1>Game Over</h1>
+        <h1>Score: {{score}}</h1>
+    </div>
+    <div *ngIf="gameOver && score === 40">
+        <h1>Max Score: 40</h1>
+    </div>
 </div>
+<iframe
+        style="border-radius: 12px; position: relative; z-index: 10; background-color: #000;"
+        [src]="playlist"
+        width="100%"
+        height="370px"
+        frameBorder="0"
+        allowfullscreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+</iframe>
