@@ -5,7 +5,7 @@ import fetchFromSpotify from './api';
     providedIn: 'root',
 })
 export class BackgroundService {
-    private token: string = 'BQB_WK9sFurwchZjhTXOmZ-YTJ2Yck5Q6QFz4unhbV4OzGG6K8Uxl4ceNiY52sA8HIVfC3grM9VvdQwx4V6TNEwCE1qtmFN-rOwuZ-_cLVTDiUQMQeM';
+    private token: string = 'BQDrVdBuo46SE0g00hsqfg--Gu1ExMqdG1P_O8IlTeHjIIrYNMd3fV_7c4TCNz_dPr06HPSKsgXqzpvYcxaWyshFLCBEg8JG_BKGJknrCZe-xKKeIWE';
     private albumCovers: string[] = [];
 
     constructor() {}
