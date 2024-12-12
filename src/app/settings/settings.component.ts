@@ -8,7 +8,7 @@ import { BackgroundService } from 'src/services/backgroundService'; // Adjust pa
   styleUrls: ['./settings.component.css'],
 })
 export class SettingsComponent implements OnInit {
-  genres: string[] = ['House', 'Alternative', 'J-Rock', 'R&B', 'Rock', 'Pop', 'Hip-Hop', 'Jazz'];
+  genres: string[] = ['House', 'Alternative', 'J-Rock', 'R&B', 'Rock', 'Pop', 'Hip-Hop', 'Jazz', 'Rap'];
   selectedGenre: string = '';
   backgroundImages: string[] = [];
 
