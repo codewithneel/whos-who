@@ -67,6 +67,14 @@ h1 {
     font-family:'Times New Roman', Times, serif
 }
 
+.correctAnswer{
+    background-color: #17B169;
+}
+
+.incorrectAnswer{
+    background-color: red;
+}
+
 .button:hover {
     color: lightcoral;
   }
