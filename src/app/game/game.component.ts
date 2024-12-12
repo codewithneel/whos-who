@@ -3,14 +3,16 @@ import fetchFromSpotify from 'src/services/api';
 import { GameConfigService } from 'src/services/gameConfig';
 import { Router } from '@angular/router';
 import { ScoreService } from 'src/services/scoreService';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
+
 export class GameComponent implements OnInit {
-  token: string = 'BQCXldz_MnLnoTwnc1jKIi9RaBSVRoD_ZSUJkdV5KeY2MzO9buX9loea8GUTzBAYD_iFQF2mcTW5te6phYgXS88bxLdu9fImWrRnszbQAASJl7w7JrY';
+  token: string = "BQBZgU0PF0nPG5yzxtm4kDJpXl7pFFcwJg3E3RQSj-AltZYEEmA8pyQPxl5_YOIIl2lMalvsi1WgGl9U2XMOC_0JXQurjcvAGZKPs7kAInEwKTerkm8";
   artists: any[] = [];
   prevUsed: Set<number> = new Set<number>();
   isGameStarted: boolean = false;
@@ -20,11 +22,28 @@ export class GameComponent implements OnInit {
   shuffledOptions: string[] = [];
   answer: string = '';
   score: number = 0;
+  apiResponseSuccess: boolean = false;
+  check: boolean = false;
+  selectedAnswer: string = "";
+  playlists : {[key:string]: string} = {
+    "House": "https://open.spotify.com/embed/playlist/37i9dQZF1DX2TRYkJECvfC?utm_source=generator",
+    "Alternative": "https://open.spotify.com/embed/playlist/1XQ08TC685gyf3BIXzhmTh?utm_source=generator",
+    "J-Rock": "https://open.spotify.com/embed/playlist/37i9dQZF1EIhJROHjsowE8?utm_source=generator",
+    "R&B": "https://open.spotify.com/embed/playlist/37i9dQZF1EQoqCH7BwIYb7?utm_source=generator",
+    "Rock": "https://open.spotify.com/embed/playlist/1ti3v0lLrJ4KhSTuxt4loZ?utm_source=generator",
+    "Pop": "https://open.spotify.com/embed/playlist/1WH6WVBwPBz35ZbWsgCpgr?utm_source=generator",
+    "Rap":"https://open.spotify.com/embed/playlist/4n2ikSftK0aQban4IFPqU6?utm_source=generator",
+    "Hip-Hop": "https://open.spotify.com/embed/playlist/0dMexqq0XIWS3QJ74z3ZhD?utm_source=generator",
+    "Jazz": "https://open.spotify.com/embed/playlist/37i9dQZF1DXbITWG1ZJKYt?utm_source=generator",
+  }
+  playlist: SafeResourceUrl | undefined;
+
 
   constructor(
       private gameConfigService: GameConfigService,
       private router: Router,
-      private scoreService: ScoreService
+      private scoreService: ScoreService,
+      private sanitizer: DomSanitizer
   ) {}
 
   startGame(): void {
@@ -41,23 +60,31 @@ export class GameComponent implements OnInit {
     this.options.clear();
     this.generateArtistToDisplay();
     this.generateOptions();
-    console.log('Answer:', this.answer);
-    console.log('Options:', this.options);
   }
 
   checkAnswer(selectedAnswer: string): void {
+    this.check = true
+    this.selectedAnswer = selectedAnswer
     if (selectedAnswer !== this.answer) {
-      this.scoreService.setScore(this.score);
-      this.endGame();
-    } else {
-      this.score += 1;
-      if (this.score >= 40) {
+      setTimeout(() => {
         this.scoreService.setScore(this.score);
         this.endGame();
-      } else {
-        this.game();
       }
-    }
+      , 1500)
+    } else {
+      setTimeout(() => {
+        this.score += 1;
+        if (this.score >= 40) {
+          this.scoreService.setScore(this.score);
+          this.endGame();
+        } else {
+          this.check = false;
+          this.selectedAnswer = "";
+          this.game();
+        }
+      }
+      , 1000)
+  }
   }
 
   endGame(): void {
@@ -104,9 +131,11 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.gameConfigService.genre.subscribe(state => {
+      this.playlist = this.sanitizer.bypassSecurityTrustResourceUrl(this.playlists[state]);
       this.fetchArtistsByGenre(state)
           .then(response => {
             this.artists = response.artists.items;
+            this.apiResponseSuccess = true;
           })
           .catch(error => {
             console.error('Error fetching artists:', error);
@@ -125,3 +154,7 @@ export class GameComponent implements OnInit {
         }
       });
 }
+
+// curl -X POST "https://accounts.spotify.com/api/token" \
+// -H "Content-Type: application/x-www-form-urlencoded" \
+// -d "grant_type=client_credentials&client_id=c2e0629a0a80434d9f1560bf93dbee43&client_secret=423ccebde713442fa82b88e63a223ba7"

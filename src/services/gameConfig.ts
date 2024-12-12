@@ -6,7 +6,7 @@ import { BehaviorSubject } from "rxjs"
 })
 
 export class GameConfigService{
-    private genreState = new BehaviorSubject<string>("rap")
+    private genreState = new BehaviorSubject<string>("Rap")
     public genre = this.genreState.asObservable()
 
     constructor(){}
