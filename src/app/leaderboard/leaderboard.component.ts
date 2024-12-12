@@ -23,7 +23,7 @@ export class LeaderboardComponent implements OnInit {
       this.leaderboard = this.leaderboardService.getLeaderboard();
 
       // Fetch album covers for the background
-      const genre = 'pop'; // Example default genre for background
+      const genre = 'pop';
       const albumCovers = await this.backgroundService.fetchAlbumCoversByGenre(genre);
 
       // Initialize with six random images
@@ -40,7 +40,7 @@ export class LeaderboardComponent implements OnInit {
         const randomIndex = Math.floor(Math.random() * albumCovers.length);
         const replaceIndex = Math.floor(Math.random() * this.backgroundImages.length);
 
-        // Replace one image
+
         this.backgroundImages[replaceIndex] = albumCovers[randomIndex];
       }
     }, 3000); // Rotate every 3 seconds

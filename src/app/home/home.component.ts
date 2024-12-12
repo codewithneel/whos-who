@@ -14,13 +14,13 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      const genre = 'pop'; // Example genre
+      const genre = 'pop';
       const albumCovers = await this.backgroundService.fetchAlbumCoversByGenre(genre);
 
-      // Initialize with the first six images
+
       this.backgroundImages = albumCovers.slice(0, 6);
 
-      // Start rotation
+
       this.startImageRotation(albumCovers);
     } catch (error) {
       console.error('Error fetching background images:', error);
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
         // Replace one image in the array
         this.backgroundImages[replaceIndex] = albumCovers[randomIndex];
       }
-    }, 3000); // Rotate every 3 seconds
+    }, 3000);
   }
 
   ngOnDestroy(): void {

@@ -27,7 +27,7 @@ export class LeaderboardService {
     // Add a new player to the leaderboard and keep the top 5
     updateLeaderboard(newPlayer: { name: string; score: number }): void {
         this.players.push(newPlayer);
-        this.players.sort((a, b) => b.score - a.score); // Sort by score descending
-        this.players = this.players.slice(0, 5); // Keep only the top 5 players
+        this.players.sort((a, b) => b.score - a.score);
+        this.players = this.players.slice(0, 5);
     }
 }
