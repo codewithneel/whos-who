@@ -1,11 +1,23 @@
 <app-navbar></app-navbar>
+
+<div class="background-container">
+    <img
+            *ngFor="let bg of backgroundImages; let i = index"
+            [src]="bg"
+            alt="Background Image {{ i }}"
+            class="background-image"
+    />
+</div>
+
 <div class="result-container">
-    <h1>Game Over</h1>
-    <p>Better luck next time!</p>
-    <p><strong>Your Score: </strong>{{ score }}</p>
-    <div>
-        <label for="name">Enter your name for the leaderboard:</label>
-        <input type="text" id="name" [(ngModel)]="playerName" placeholder="Your Name" />
+    <div class="result-box">
+        <h1>Game Over</h1>
+        <p>Better luck next time!</p>
+        <p><strong>Your Score: </strong>{{ score }}</p>
+        <div>
+            <label for="name">Enter your name for the leaderboard:</label>
+            <input type="text" id="name" [(ngModel)]="playerName" placeholder="Your Name" />
+        </div>
+        <button (click)="submitScore()">Submit Score</button>
     </div>
-    <button (click)="submitScore()">Submit Score</button>
 </div>
